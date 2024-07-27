@@ -20,6 +20,7 @@ const Home = () => {
       setWeatherData(response.data);
     } catch (error) {
       setError("Failed to fetch weather data");
+      alert("Failed to fetch weather data");
     } finally {
       setLoading(false);
     }
@@ -43,7 +44,7 @@ const Home = () => {
         <button onClick={handleSearch}>Search</button>
       </div>
       {loading && <p className="loading-message">Loading data...</p>}
-      {error && <p className="error-message">{error}</p>}
+      {/* {error && <p className="error-message">{error}</p>} */}
       {weatherData && (
         <div className="weather-cards">
           <WeatherCard
