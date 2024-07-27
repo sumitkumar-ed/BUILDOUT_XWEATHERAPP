@@ -54,4 +54,24 @@ button:hover {
 .weather-cards {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input, button {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+  }
+
+  .weather-cards {
+    flex-direction: column;
+    align-items: center;
+  }
 }
