@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import WeatherCard from '../components/WeatherCard';
-import './Home.css';
+import React, { useState } from "react";
+import axios from "axios";
+import WeatherCard from "../components/WeatherCard";
+import "./Home.css";
 
 const Home = () => {
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const fetchWeatherData = async () => {
     setLoading(true);
-    setError('');
+    setError("");
+    setWeatherData(null);
     try {
-      const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}`);
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}`
+      );
       setWeatherData(response.data);
     } catch (error) {
-      setError('Failed to fetch weather data');
+      setError("Failed to fetch weather data");
     } finally {
       setLoading(false);
     }
   };
 
   const handleSearch = () => {
-    if (city.trim() !== '') {
+    if (city.trim() !== "") {
       fetchWeatherData();
     }
   };
@@ -43,10 +46,26 @@ const Home = () => {
       {error && <p className="error-message">{error}</p>}
       {weatherData && (
         <div className="weather-cards">
-          <WeatherCard title="Temperature" value={weatherData.current.temp_c} unit="°C" />
-          <WeatherCard title="Humidity" value={weatherData.current.humidity} unit="%" />
-          <WeatherCard title="Condition" value={weatherData.current.condition.text} unit="" />
-          <WeatherCard title="Wind Speed" value={weatherData.current.wind_kph} unit="kph" />
+          <WeatherCard
+            title="Temperature"
+            value={weatherData.current.temp_c}
+            unit="°C"
+          />
+          <WeatherCard
+            title="Humidity"
+            value={weatherData.current.humidity}
+            unit="%"
+          />
+          <WeatherCard
+            title="Condition"
+            value={weatherData.current.condition.text}
+            unit=""
+          />
+          <WeatherCard
+            title="Wind Speed"
+            value={weatherData.current.wind_kph}
+            unit="kph"
+          />
         </div>
       )}
     </div>
